@@ -90,6 +90,11 @@ export const en = {
         title: 'Automation Solutions',
         description: 'Creation of comprehensive solutions for business process automation',
         technologies: ['n8n', 'Node.js', 'PostgreSQL']
+      },
+      {
+        title: 'Retail Automation Platform',
+        description: 'Comprehensive automation system for a major retail chain: from POS terminals to corporate ERP',
+        technologies: ['C#', '.NET', 'MS SQL', 'React']
       }
     ]
   },

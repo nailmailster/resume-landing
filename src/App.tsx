@@ -18,21 +18,21 @@ function App() {
     const currentIndex = languages.indexOf(language);
     const nextIndex = (currentIndex + 1) % languages.length;
     const newLang = languages[nextIndex];
-    i18n.changeLanguage(newLang);
+    void i18n.changeLanguage(newLang);
     setLanguage(newLang);
   };
 
   return (
-    <div className="min-h-screen w-full bg-light dark:bg-dark">
+    <div className="min-h-screen w-full bg-light dark:bg-dark text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav className="flex justify-between items-center py-4">
           <button
             onClick={toggleLanguage}
-            className="px-4 py-2 text-sm font-medium text-primary bg-transparent border border-primary rounded hover:bg-primary hover:text-white transition-colors"
+            className="px-4 py-2 text-sm font-medium bg-primary text-white rounded hover:bg-secondary transition-colors"
           >
             {language.toUpperCase()}
           </button>
-          <div className="flex space-x-6 text-dark dark:text-light">
+          <div className="flex space-x-6">
             {['about', 'experience', 'skills', 'portfolio', 'contacts'].map((item) => (
               <a
                 key={item}

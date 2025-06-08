@@ -90,6 +90,11 @@ export const zh = {
         title: '自动化解决方案',
         description: '创建全面的业务流程自动化解决方案',
         technologies: ['n8n', 'Node.js', 'PostgreSQL']
+      },
+      {
+        title: '零售自动化平台',
+        description: '为大型零售连锁店开发的综合自动化系统：从POS终端到企业ERP',
+        technologies: ['C#', '.NET', 'MS SQL', 'React']
       }
     ]
   },

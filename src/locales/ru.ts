@@ -90,6 +90,11 @@ export const ru = {
         title: 'Automation Solutions',
         description: 'Создание комплексных решений для автоматизации бизнес-процессов',
         technologies: ['n8n', 'Node.js', 'PostgreSQL']
+      },
+      {
+        title: 'Retail Automation Platform',
+        description: 'Комплексная система автоматизации для крупной торговой сети: от POS-терминалов до корпоративной ERP',
+        technologies: ['C#', '.NET', 'MS SQL', 'React']
       }
     ]
   },
