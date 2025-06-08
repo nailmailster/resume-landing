@@ -44,7 +44,7 @@ function App() {
         <nav className="flex justify-between items-center py-4">
           <button
             onClick={toggleLanguage}
-            className="px-4 py-2 text-sm font-medium bg-primary hover:bg-secondary text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+            className="px-4 py-2 text-sm font-medium bg-primary hover:bg-secondary text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 relative z-50 cursor-pointer"
           >
             {language.toUpperCase()}
           </button>
