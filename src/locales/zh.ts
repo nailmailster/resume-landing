@@ -10,6 +10,7 @@ export const zh = {
   name: 'Nail Yusupov',
   title: '软件开发工程师 | AI 自动化爱好者',
   about: {
+    title: '关于我',
     description: '拥有30多年软件开发经验的开发者。目前积极探索AI在开发流程和业务任务自动化中的应用。特别关注AI工具在工作流程中的集成以及基于它们创建自动化解决方案。在各个开发领域都有丰富的经验：从嵌入式系统到企业解决方案。'
   },
   experience: {

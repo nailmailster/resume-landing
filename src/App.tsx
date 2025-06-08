@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AnimatedText } from './components/AnimatedText';
 import { AnimatedBackground } from './components/AnimatedBackground';
@@ -13,13 +13,29 @@ function App() {
   const { t, i18n } = useTranslation();
   const [language, setLanguage] = useState<Language>(i18n.language as Language);
 
+  useEffect(() => {
+    const currentLang = i18n.language as Language;
+    setLanguage(currentLang);
+  }, [i18n.language]);
+
   const toggleLanguage = () => {
     const languages: Language[] = ['en', 'ru', 'zh'];
     const currentIndex = languages.indexOf(language);
     const nextIndex = (currentIndex + 1) % languages.length;
     const newLang = languages[nextIndex];
-    void i18n.changeLanguage(newLang);
-    setLanguage(newLang);
+    
+    try {
+      i18n.changeLanguage(newLang)
+        .then(() => {
+          setLanguage(newLang);
+          document.documentElement.lang = newLang;
+        })
+        .catch((error) => {
+          console.error('Failed to change language:', error);
+        });
+    } catch (error) {
+      console.error('Error while changing language:', error);
+    }
   };
 
   return (
@@ -28,7 +44,7 @@ function App() {
         <nav className="flex justify-between items-center py-4">
           <button
             onClick={toggleLanguage}
-            className="px-4 py-2 text-sm font-medium bg-primary text-white rounded hover:bg-secondary transition-colors"
+            className="px-4 py-2 text-sm font-medium bg-primary hover:bg-secondary text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
           >
             {language.toUpperCase()}
           </button>

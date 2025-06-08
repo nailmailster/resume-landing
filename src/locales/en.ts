@@ -10,6 +10,7 @@ export const en = {
   name: 'Nail Yusupov',
   title: 'Software Developer | AI Automation Enthusiast',
   about: {
+    title: 'About Me',
     description: 'Developer with over 30 years of experience in creating software solutions. Currently actively exploring AI capabilities in automating development processes and business tasks. Particularly interested in integrating AI tools into workflows and creating automated solutions based on them. Have extensive experience in various development areas: from embedded systems to enterprise solutions.'
   },
   experience: {

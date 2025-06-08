@@ -16,6 +16,11 @@ i18n
     fallbackLng: 'en',
     interpolation: {
       escapeValue: false
+    },
+    load: 'languageOnly',
+    detection: {
+      order: ['navigator'],
+      caches: []
     }
   });
 
