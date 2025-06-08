@@ -7,13 +7,13 @@ interface AnimatedTextProps {
 }
 
 export const AnimatedText = ({ text, className = '', delay = 0 }: AnimatedTextProps) => {
-  const letters = Array.from(text);
+  const words = text.split(' ');
 
   const container = {
     hidden: { opacity: 0 },
-    visible: (i = 1) => ({
+    visible: () => ({
       opacity: 1,
-      transition: { staggerChildren: 0.03, delayChildren: delay * i }
+      transition: { staggerChildren: 0.12, delayChildren: delay }
     })
   };
 
@@ -24,7 +24,7 @@ export const AnimatedText = ({ text, className = '', delay = 0 }: AnimatedTextPr
       transition: {
         type: "spring",
         damping: 12,
-        stiffness: 200
+        stiffness: 100
       }
     },
     hidden: {
@@ -33,28 +33,27 @@ export const AnimatedText = ({ text, className = '', delay = 0 }: AnimatedTextPr
       transition: {
         type: "spring",
         damping: 12,
-        stiffness: 200
+        stiffness: 100
       }
     }
   };
 
   return (
-    <motion.span
-      className={`inline-block ${className}`}
+    <motion.div
+      className={`flex flex-wrap justify-center items-center gap-x-2 ${className}`}
       variants={container}
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
+      animate="visible"
     >
-      {letters.map((letter, index) => (
+      {words.map((word, index) => (
         <motion.span
           key={index}
           className="inline-block"
           variants={child}
         >
-          {letter === " " ? "\u00A0" : letter}
+          {word}
         </motion.span>
       ))}
-    </motion.span>
+    </motion.div>
   );
 }; 

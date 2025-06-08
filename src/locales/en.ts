@@ -1,71 +1,79 @@
 export const en = {
-  header: {
+  navigation: {
     about: 'About',
     experience: 'Experience',
     skills: 'Skills',
     portfolio: 'Portfolio',
-    contact: 'Contact'
+    contacts: 'Contacts'
   },
-  hero: {
-    greeting: 'Hi, I\'m',
-    name: 'Nail Yusupov',
-    position: 'Software Developer | AI Automation Enthusiast'
-  },
+  greeting: 'Hi, I\'m',
+  name: 'Nail Yusupov',
+  title: 'Software Developer | AI Automation Enthusiast',
   about: {
-    title: 'About Me',
-    description: 'Developer with over 30 years of experience in creating software solutions. Recently, I\'ve been actively exploring AI capabilities in automating development processes and business tasks. Particularly interested in integrating AI tools into workflows and creating automated solutions based on them. Have extensive experience in various development areas: from embedded systems to enterprise solutions.'
+    description: 'Developer with over 30 years of experience in creating software solutions. Currently actively exploring AI capabilities in automating development processes and business tasks. Particularly interested in integrating AI tools into workflows and creating automated solutions based on them. Have extensive experience in various development areas: from embedded systems to enterprise solutions.'
   },
   experience: {
-    title: 'Experience',
+    title: 'Work Experience',
     jobs: [
       {
         title: 'Independent Developer',
-        company: 'Freelance',
-        period: '2020 - Present',
-        description: 'Development and implementation of business process automation solutions. Active use of AI assistants (Cursor AI, DeepSeek, Qwen) for development optimization. Creation of Telegram bots and AI tools integration.'
+        period: '2020 - present',
+        description: 'Business process automation for a major retailer from initial stage to maturity. Development and implementation of comprehensive solutions for operational efficiency optimization.',
+        achievements: [
+          'Integration of AI tools into development processes',
+          'Automation of routine tasks using n8n',
+          'Familiarity with Make (Integromat) through webinars and demonstrations'
+        ]
       },
       {
-        title: 'Software Developer',
-        company: 'Various Projects',
-        period: '1990s - 2020',
-        description: 'Development of complex software solutions for retail and accounting automation. Creation of POS systems and customized 1C configurations. Key project: process automation for Korzinka.uz.'
+        title: 'Lead Developer',
+        period: '2010 - 2020',
+        description: 'Development and maintenance of enterprise automation systems. Integration of various business applications.',
+        achievements: [
+          'Development process optimization',
+          'Implementation of modern technologies',
+          'Development team management'
+        ]
       }
     ]
   },
   skills: {
     title: 'Skills',
     categories: {
-      ai_automation: {
-        title: 'AI & Automation',
+      languages: {
+        title: 'Programming Languages',
         items: [
-          { name: 'AI Assistants (ChatGPT, Claude)', level: 90 },
-          { name: 'Telegram Bots', level: 85 },
-          { name: 'Process Automation', level: 95 }
+          { name: 'JavaScript', level: 90 },
+          { name: 'TypeScript', level: 85 },
+          { name: 'Python', level: 80 },
+          { name: 'SQL', level: 90 },
+          { name: 'C#', level: 75 }
         ]
       },
-      development: {
-        title: 'Development',
+      frameworks: {
+        title: 'Frameworks & Libraries',
         items: [
-          { name: 'C#', level: 90 },
-          { name: 'C++', level: 85 },
-          { name: '1C', level: 95 },
-          { name: 'Unity 3D', level: 75 }
+          { name: 'React', level: 85 },
+          { name: 'Node.js', level: 90 },
+          { name: 'Express', level: 85 },
+          { name: '.NET', level: 75 }
         ]
       },
-      specialized: {
-        title: 'Specialized Skills',
+      tools: {
+        title: 'Tools',
         items: [
-          { name: 'Computer Vision (OpenCV)', level: 70 },
-          { name: 'Arduino/ESP', level: 80 },
-          { name: 'Data Analysis', level: 85 }
+          { name: 'Git', level: 90 },
+          { name: 'Docker', level: 80 },
+          { name: 'n8n', level: 85 },
+          { name: 'AI (ChatGPT, Cursor AI, DeepSeek, Qwen)', level: 90 }
         ]
       },
-      soft_skills: {
-        title: 'Soft Skills',
+      databases: {
+        title: 'Databases',
         items: [
-          { name: 'Complex Problem Solving', level: 95 },
-          { name: 'Self-Learning', level: 90 },
-          { name: 'Documentation', level: 85 }
+          { name: 'PostgreSQL', level: 90 },
+          { name: 'MongoDB', level: 85 },
+          { name: 'Redis', level: 80 }
         ]
       }
     }
@@ -74,25 +82,21 @@ export const en = {
     title: 'Portfolio',
     projects: [
       {
-        title: 'AI-Enhanced Resume Website',
-        description: 'Modern resume website built with React, TypeScript, and GitHub Actions. Developed using AI tools to optimize the development process.',
-        link: 'https://nailmailster.github.io/resume-landing/'
+        title: 'AI-Enhanced Development Tools',
+        description: 'Development of tools for process automation using AI',
+        technologies: ['Python', 'TypeScript', 'AI APIs']
       },
       {
-        title: 'Stock Market Analyzer',
-        description: 'Tool for visualization and analysis of stock market data. Developed for testing trading hypotheses and forecasting.',
-        link: '#'
-      },
-      {
-        title: 'Telegram AI Bots',
-        description: 'Development of bots with integration of various AI services for process automation and user interaction.',
-        link: '#'
+        title: 'Automation Solutions',
+        description: 'Creation of comprehensive solutions for business process automation',
+        technologies: ['n8n', 'Node.js', 'PostgreSQL']
       }
     ]
   },
-  contact: {
-    title: 'Contact',
-    email: 'nailmailster@gmail.com',
-    github: 'https://github.com/nailmailster'
+  contacts: {
+    title: 'Contacts',
+    email: 'nail.mailster@gmail.com',
+    github: 'https://github.com/nailmailster',
+    linkedin: 'https://www.linkedin.com/in/nail-yusupov-84469773/'
   }
 } 

@@ -1,144 +1,117 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Section } from './components/Section';
-import { ProjectCard } from './components/ProjectCard';
-import { SkillCard } from './components/SkillCard';
+import { useTranslation } from 'react-i18next';
 import { AnimatedText } from './components/AnimatedText';
 import { AnimatedBackground } from './components/AnimatedBackground';
-import { ru } from './locales/ru';
-import { en } from './locales/en';
+import { Section } from './components/Section';
+import { SkillCard } from './components/SkillCard';
+import { ProjectCard } from './components/ProjectCard';
+import { ContactSection } from './components/ContactSection';
+
+type Language = 'en' | 'ru' | 'zh';
 
 function App() {
-  const [lang, setLang] = useState<'ru' | 'en'>('ru');
-  const t = lang === 'ru' ? ru : en;
+  const { t, i18n } = useTranslation();
+  const [language, setLanguage] = useState<Language>(i18n.language as Language);
+
+  const toggleLanguage = () => {
+    const languages: Language[] = ['en', 'ru', 'zh'];
+    const currentIndex = languages.indexOf(language);
+    const nextIndex = (currentIndex + 1) % languages.length;
+    const newLang = languages[nextIndex];
+    i18n.changeLanguage(newLang);
+    setLanguage(newLang);
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
-      <AnimatedBackground />
-      
-      <header className="fixed top-0 w-full bg-white/80 dark:bg-gray-800/80 shadow-md z-50 backdrop-blur-sm">
-        <nav className="container mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <motion.button
-              className="text-sm px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setLang(lang === 'ru' ? 'en' : 'ru')}
-            >
-              {lang === 'ru' ? 'EN' : 'RU'}
-            </motion.button>
-            <div className="flex space-x-6">
-              {Object.keys(t.header).map((key) => (
-                <motion.a
-                  key={key}
-                  href={`#${key}`}
-                  className="hover:text-blue-500 transition-colors"
-                  whileHover={{ scale: 1.1 }}
-                >
-                  {t.header[key as keyof typeof t.header]}
-                </motion.a>
-              ))}
-            </div>
+    <div className="min-h-screen w-full bg-light dark:bg-dark">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav className="flex justify-between items-center py-4">
+          <button
+            onClick={toggleLanguage}
+            className="px-4 py-2 text-sm font-medium text-primary bg-transparent border border-primary rounded hover:bg-primary hover:text-white transition-colors"
+          >
+            {language.toUpperCase()}
+          </button>
+          <div className="flex space-x-6 text-dark dark:text-light">
+            {['about', 'experience', 'skills', 'portfolio', 'contacts'].map((item) => (
+              <a
+                key={item}
+                href={`#${item}`}
+                className="hover:text-primary transition-colors text-sm sm:text-base"
+              >
+                {t(`navigation.${item}`)}
+              </a>
+            ))}
           </div>
         </nav>
-      </header>
+        
+        <main className="py-8">
+          <AnimatedBackground>
+            <section id="about" className="text-center mb-16">
+              <div className="space-y-4">
+                <AnimatedText text={t('greeting')} className="text-xl sm:text-2xl text-dark dark:text-light" />
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary my-4 leading-tight">
+                  {t('name')}
+                </h1>
+                <AnimatedText
+                  text={t('title')}
+                  className="text-xl sm:text-2xl md:text-3xl text-secondary"
+                />
+              </div>
+            </section>
+            
+            <Section id="about" title={t('about.title')}>
+              <p className="text-lg text-center max-w-3xl mx-auto">
+                {t('about.description')}
+              </p>
+            </Section>
 
-      <main className="container mx-auto px-6 pt-24">
-        <motion.div
-          className="text-center py-20"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <AnimatedText
-            text={t.hero.greeting}
-            className="text-xl text-gray-600 dark:text-gray-400"
-            delay={0.2}
-          />
-          <AnimatedText
-            text={t.hero.name}
-            className="text-5xl font-bold mt-2"
-            delay={0.4}
-          />
-          <AnimatedText
-            text={t.hero.position}
-            className="text-2xl text-blue-500 mt-4"
-            delay={0.6}
-          />
-        </motion.div>
+            <Section id="experience" title={t('experience.title')}>
+              <div className="space-y-8">
+                {(t('experience.jobs', { returnObjects: true }) as Array<any>).map((job, index) => (
+                  <div key={index} className="border-l-4 border-primary pl-4">
+                    <h3 className="text-xl font-bold">{job.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-400">{job.period}</p>
+                    <p className="mt-2">{job.description}</p>
+                    <ul className="mt-2 list-disc list-inside">
+                      {job.achievements.map((achievement: string, i: number) => (
+                        <li key={i}>{achievement}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </Section>
 
-        <Section id="about" title={t.about.title}>
-          <p className="text-lg text-center max-w-3xl mx-auto">
-            {t.about.description}
-          </p>
-        </Section>
+            <Section id="skills" title={t('skills.title')}>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {Object.entries(t('skills.categories', { returnObjects: true }) as Record<string, any>).map(([key, category]) => (
+                  <SkillCard
+                    key={key}
+                    title={category.title}
+                    items={category.items}
+                  />
+                ))}
+              </div>
+            </Section>
 
-        <Section id="experience" title={t.experience.title}>
-          <div className="space-y-8">
-            {t.experience.jobs.map((job, index) => (
-              <motion.div
-                key={index}
-                className="bg-white/80 dark:bg-gray-800/80 rounded-lg shadow-lg p-6 backdrop-blur-sm"
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-                whileHover={{ scale: 1.02 }}
-              >
-                <h3 className="text-xl font-bold">{job.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400">{job.company} | {job.period}</p>
-                <p className="mt-2">{job.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </Section>
+            <Section id="portfolio" title={t('portfolio.title')}>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {(t('portfolio.projects', { returnObjects: true }) as Array<any>).map((project, index) => (
+                  <ProjectCard
+                    key={index}
+                    title={project.title}
+                    description={project.description}
+                    technologies={project.technologies}
+                  />
+                ))}
+              </div>
+            </Section>
 
-        <Section id="skills" title={t.skills.title}>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {Object.entries(t.skills.categories).map(([key, category]) => (
-              <SkillCard
-                key={key}
-                title={category.title}
-                items={category.items}
-              />
-            ))}
-          </div>
-        </Section>
-
-        <Section id="portfolio" title={t.portfolio.title}>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {t.portfolio.projects.map((project, index) => (
-              <ProjectCard
-                key={index}
-                title={project.title}
-                description={project.description}
-                link={project.link}
-              />
-            ))}
-          </div>
-        </Section>
-
-        <Section id="contact" title={t.contact.title}>
-          <div className="text-center space-y-4">
-            <motion.a
-              href={`mailto:${t.contact.email}`}
-              className="block text-blue-500 hover:text-blue-700 transition-colors"
-              whileHover={{ scale: 1.1 }}
-            >
-              {t.contact.email}
-            </motion.a>
-            <motion.a
-              href={t.contact.github}
-              className="block text-blue-500 hover:text-blue-700 transition-colors"
-              whileHover={{ scale: 1.1 }}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GitHub
-            </motion.a>
-          </div>
-        </Section>
-      </main>
+            <ContactSection />
+          </AnimatedBackground>
+        </main>
+      </div>
     </div>
   );
 }
