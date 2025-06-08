@@ -1,126 +1,144 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import Header from './components/Header';
+import { Section } from './components/Section';
+import { ProjectCard } from './components/ProjectCard';
+import { SkillCard } from './components/SkillCard';
+import { AnimatedText } from './components/AnimatedText';
+import { AnimatedBackground } from './components/AnimatedBackground';
+import { ru } from './locales/ru';
+import { en } from './locales/en';
 
 function App() {
+  const [lang, setLang] = useState<'ru' | 'en'>('ru');
+  const t = lang === 'ru' ? ru : en;
+
   return (
-    <div className="min-h-screen bg-light">
-      <Header />
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
+      <AnimatedBackground />
       
-      <main className="pt-20">
-        {/* Hero Section */}
-        <motion.section 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="section bg-primary text-white"
-        >
-          <div className="container">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              Привет, я Иван Иванов
-            </h1>
-            <p className="text-xl md:text-2xl text-accent">
-              Frontend Developer & UI/UX Designer
-            </p>
-          </div>
-        </motion.section>
-
-        {/* About Section */}
-        <section id="about" className="section">
-          <div className="container">
-            <h2 className="heading">Обо мне</h2>
-            <p className="text-lg">
-              Креативный разработчик с страстью к созданию красивых и функциональных веб-приложений.
-              Более 5 лет опыта в разработке пользовательских интерфейсов и веб-приложений.
-            </p>
-          </div>
-        </section>
-
-        {/* Experience Section */}
-        <section id="experience" className="section bg-white">
-          <div className="container">
-            <h2 className="heading">Опыт работы</h2>
-            <div className="space-y-8">
-              <div className="border-l-4 border-secondary pl-4">
-                <h3 className="subheading">Senior Frontend Developer</h3>
-                <p className="text-dark/70">Awesome Company • 2020 - Настоящее время</p>
-                <p className="mt-2">Разработка и поддержка крупных веб-приложений</p>
-              </div>
-              <div className="border-l-4 border-secondary pl-4">
-                <h3 className="subheading">Frontend Developer</h3>
-                <p className="text-dark/70">Cool Startup • 2018 - 2020</p>
-                <p className="mt-2">Создание пользовательских интерфейсов</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Skills Section */}
-        <section id="skills" className="section bg-light">
-          <div className="container">
-            <h2 className="heading">Навыки</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="bg-white p-4 rounded-lg shadow-md">
-                <h3 className="font-semibold text-secondary">Frontend</h3>
-                <p>React, Vue, TypeScript</p>
-              </div>
-              <div className="bg-white p-4 rounded-lg shadow-md">
-                <h3 className="font-semibold text-secondary">UI/UX</h3>
-                <p>Figma, Adobe XD</p>
-              </div>
-              <div className="bg-white p-4 rounded-lg shadow-md">
-                <h3 className="font-semibold text-secondary">Backend</h3>
-                <p>Node.js, Express</p>
-              </div>
-              <div className="bg-white p-4 rounded-lg shadow-md">
-                <h3 className="font-semibold text-secondary">Other</h3>
-                <p>Git, Docker</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Portfolio Section */}
-        <section id="portfolio" className="section">
-          <div className="container">
-            <h2 className="heading">Портфолио</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[1, 2, 3].map((item) => (
-                <motion.div
-                  key={item}
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-white rounded-lg shadow-md overflow-hidden"
+      <header className="fixed top-0 w-full bg-white/80 dark:bg-gray-800/80 shadow-md z-50 backdrop-blur-sm">
+        <nav className="container mx-auto px-6 py-4">
+          <div className="flex justify-between items-center">
+            <motion.button
+              className="text-sm px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition-colors"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setLang(lang === 'ru' ? 'en' : 'ru')}
+            >
+              {lang === 'ru' ? 'EN' : 'RU'}
+            </motion.button>
+            <div className="flex space-x-6">
+              {Object.keys(t.header).map((key) => (
+                <motion.a
+                  key={key}
+                  href={`#${key}`}
+                  className="hover:text-blue-500 transition-colors"
+                  whileHover={{ scale: 1.1 }}
                 >
-                  <div className="h-48 bg-secondary"></div>
-                  <div className="p-4">
-                    <h3 className="font-semibold text-lg">Проект {item}</h3>
-                    <p className="text-dark/70">Краткое описание проекта</p>
-                  </div>
-                </motion.div>
+                  {t.header[key as keyof typeof t.header]}
+                </motion.a>
               ))}
             </div>
           </div>
-        </section>
+        </nav>
+      </header>
 
-        {/* Contact Section */}
-        <section id="contact" className="section bg-primary text-white">
-          <div className="container">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Свяжитесь со мной</h2>
-            <div className="flex flex-col space-y-4">
-              <a href="mailto:example@email.com" className="text-accent hover:text-white transition-colors">
-                example@email.com
-              </a>
-              <a href="tel:+79001234567" className="text-accent hover:text-white transition-colors">
-                +7 (900) 123-45-67
-              </a>
-            </div>
+      <main className="container mx-auto px-6 pt-24">
+        <motion.div
+          className="text-center py-20"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <AnimatedText
+            text={t.hero.greeting}
+            className="text-xl text-gray-600 dark:text-gray-400"
+            delay={0.2}
+          />
+          <AnimatedText
+            text={t.hero.name}
+            className="text-5xl font-bold mt-2"
+            delay={0.4}
+          />
+          <AnimatedText
+            text={t.hero.position}
+            className="text-2xl text-blue-500 mt-4"
+            delay={0.6}
+          />
+        </motion.div>
+
+        <Section id="about" title={t.about.title}>
+          <p className="text-lg text-center max-w-3xl mx-auto">
+            {t.about.description}
+          </p>
+        </Section>
+
+        <Section id="experience" title={t.experience.title}>
+          <div className="space-y-8">
+            {t.experience.jobs.map((job, index) => (
+              <motion.div
+                key={index}
+                className="bg-white/80 dark:bg-gray-800/80 rounded-lg shadow-lg p-6 backdrop-blur-sm"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
+                whileHover={{ scale: 1.02 }}
+              >
+                <h3 className="text-xl font-bold">{job.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400">{job.company} | {job.period}</p>
+                <p className="mt-2">{job.description}</p>
+              </motion.div>
+            ))}
           </div>
-        </section>
-      </main>
+        </Section>
 
-      <footer className="bg-dark text-white py-4">
-        <div className="container text-center">
-          <p>© 2024 Иван Иванов. Все права защищены.</p>
-        </div>
-      </footer>
+        <Section id="skills" title={t.skills.title}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {Object.entries(t.skills.categories).map(([key, category]) => (
+              <SkillCard
+                key={key}
+                title={category.title}
+                items={category.items}
+              />
+            ))}
+          </div>
+        </Section>
+
+        <Section id="portfolio" title={t.portfolio.title}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {t.portfolio.projects.map((project, index) => (
+              <ProjectCard
+                key={index}
+                title={project.title}
+                description={project.description}
+                link={project.link}
+              />
+            ))}
+          </div>
+        </Section>
+
+        <Section id="contact" title={t.contact.title}>
+          <div className="text-center space-y-4">
+            <motion.a
+              href={`mailto:${t.contact.email}`}
+              className="block text-blue-500 hover:text-blue-700 transition-colors"
+              whileHover={{ scale: 1.1 }}
+            >
+              {t.contact.email}
+            </motion.a>
+            <motion.a
+              href={t.contact.github}
+              className="block text-blue-500 hover:text-blue-700 transition-colors"
+              whileHover={{ scale: 1.1 }}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </motion.a>
+          </div>
+        </Section>
+      </main>
     </div>
   );
 }
