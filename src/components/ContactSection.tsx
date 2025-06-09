@@ -12,7 +12,7 @@ export const ContactSection = () => {
   ];
 
   return (
-    <section id="contacts" className="py-16">
+    <section id="contacts" className="py-16 relative z-50 bg-light dark:bg-dark">
       <h2 className="text-3xl font-bold text-center mb-8">{t('contacts.title')}</h2>
       <div className="flex flex-col items-center space-y-4">
         {contacts.map((contact, index) => (
@@ -21,7 +21,7 @@ export const ContactSection = () => {
             href={contact.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center space-x-2 text-lg hover:text-primary transition-colors"
+            className="flex items-center space-x-2 text-lg hover:text-primary transition-colors cursor-pointer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >

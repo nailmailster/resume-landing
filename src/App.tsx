@@ -41,7 +41,7 @@ function App() {
   return (
     <div className="min-h-screen w-full bg-light dark:bg-dark text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <nav className="flex justify-between items-center py-4">
+        <nav className="flex justify-between items-center py-4 relative z-50 bg-light dark:bg-dark">
           <button
             onClick={toggleLanguage}
             className="px-4 py-2 text-sm font-medium bg-primary hover:bg-secondary text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 relative z-50 cursor-pointer"
@@ -53,7 +53,7 @@ function App() {
               <a
                 key={item}
                 href={`#${item}`}
-                className="hover:text-primary transition-colors text-sm sm:text-base"
+                className="hover:text-primary transition-colors text-sm sm:text-base cursor-pointer relative z-50"
               >
                 {t(`navigation.${item}`)}
               </a>
