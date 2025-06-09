@@ -41,27 +41,29 @@ function App() {
   return (
     <div className="min-h-screen w-full bg-light dark:bg-dark text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <nav className="flex justify-between items-center py-4 relative z-50 bg-light dark:bg-dark">
-          <button
-            onClick={toggleLanguage}
-            className="px-4 py-2 text-sm font-medium bg-primary hover:bg-secondary text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 relative z-50 cursor-pointer"
-          >
-            {language.toUpperCase()}
-          </button>
-          <div className="flex space-x-6">
-            {['about', 'experience', 'skills', 'portfolio', 'contacts'].map((item) => (
-              <a
-                key={item}
-                href={`#${item}`}
-                className="hover:text-primary transition-colors text-sm sm:text-base cursor-pointer relative z-50"
-              >
-                {t(`navigation.${item}`)}
-              </a>
-            ))}
+        <nav className="flex justify-between items-center py-4 fixed top-0 left-0 right-0 z-50 bg-light dark:bg-dark shadow-md backdrop-blur-sm bg-opacity-90 dark:bg-opacity-90">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-between items-center">
+            <button
+              onClick={toggleLanguage}
+              className="px-4 py-2 text-sm font-medium bg-primary hover:bg-secondary text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 relative z-50 cursor-pointer"
+            >
+              {language.toUpperCase()}
+            </button>
+            <div className="flex space-x-6">
+              {['about', 'experience', 'skills', 'portfolio', 'contacts'].map((item) => (
+                <a
+                  key={item}
+                  href={`#${item}`}
+                  className="hover:text-primary transition-colors text-sm sm:text-base cursor-pointer relative z-50"
+                >
+                  {t(`navigation.${item}`)}
+                </a>
+              ))}
+            </div>
           </div>
         </nav>
         
-        <main className="py-8">
+        <main className="py-8 mt-16">
           <AnimatedBackground>
             <section id="about" className="text-center mb-16">
               <div className="space-y-4">
@@ -123,9 +125,9 @@ function App() {
                 ))}
               </div>
             </Section>
-
-            <ContactSection />
           </AnimatedBackground>
+          
+          <ContactSection />
         </main>
       </div>
     </div>
